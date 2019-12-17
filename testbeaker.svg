@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Keyshape -->
+<svg xmlns="http://www.w3.org/2000/svg" class="apparatus1" viewBox="0 0 370 350">
+    <path fill="#ffffff" stroke="none" d="M370,0L0,0L0,350L370,350ZM275,125L105,125L105,225C105,236.046,113.954,245,125,245L255,245C266.046,245,275,236.046,275,225L275,145C275,140.634,276.726,136.595,278.131,133.306C280.281,128.275,281.68,125,275,125Z" fill-rule="evenodd" transform="translate(185,175) translate(-185,-175)"/>
+    <rect rx="10" ry="10" width="200" height="40" stroke="none" fill="#808080" stroke-width="1px" transform="translate(0,0) translate(90,0)"/>
+    <path fill="#808080" opacity="0.3" stroke="none" stroke-width="1px" d="M160,0L20,0C8.9543,0,0,8.9543,0,20L0,210C0,221.046,8.9543,230,20,230L160,230C171.046,230,180,221.046,180,210L180,20C180,8.9543,171.046,0,160,0ZM175,105L5,105L5,205C5,216.046,13.9543,225,25,225L155,225C166.046,225,175,216.046,175,205Z" fill-rule="evenodd" transform="translate(0,0) translate(100,20)"/>
+    <rect rx="20" ry="20" width="370" height="100" stroke="none" fill="#808080" stroke-width="1px" opacity="0.7" transform="translate(0,0) translate(0,250)"/>
+    <ellipse stroke="#8b0000" stroke-width="7px" fill="#808080" rx="33" ry="33" transform="translate(0,0) translate(60,300)"/>
+    <ellipse stroke="#8b0000" stroke-width="7px" fill="#808080" rx="33" ry="33" transform="translate(0,0) translate(230,300)"/>
+    <rect rx="10" ry="10" width="70" height="40" stroke="none" fill="#d3d3d3" stroke-width="1px" transform="translate(0,0) translate(100,280)"/>
+    <rect rx="10" ry="10" width="70" height="40" stroke="none" fill="#d3d3d3" stroke-width="1px" transform="translate(0,0) translate(270,280)"/>
+    <text font-size="16" font-family="impact" stroke="none" fill="#000000" stroke-width="1px" transform="translate(0,0) translate(107,310)">500 rpm</text>
+    <text font-size="22" font-family="impact" fill="#8b0000" stroke="none" stroke-width="1px" transform="translate(0,0) translate(285,310)">60°C</text>
+</svg>
