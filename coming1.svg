@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Keyshape -->
+<svg xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 300 700" style="white-space: pre;">
+    <defs>
+        <linearGradient id="Gradient-0" x1="150" y1="0" x2="150" y2="700" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#ffb64f"/>
+            <stop offset="1" stop-color="#00e5ff"/>
+        </linearGradient>
+    </defs>
+    <rect width="300" height="700" fill="url(#Gradient-0)" stroke="none" rx="5" transform="translate(150,350) translate(-150,-350)"/>
+    <path fill="#fffcf7" stroke="none" d="M5,0L46.5,0C49.2614,0,51.5,2.23858,51.5,5L51.5,54C51.5,56.7614,34.7614,71,32,71L5,71C2.23858,71,0,68.7614,0,66L0,5C0,2.23858,2.23858,0,5,0Z" transform="translate(87.0977,540.5) translate(-25.75,-35.5)"/>
+    <path fill="#29aa2e" stroke="none" d="M5,0L46.5,0C49.2614,0,51.5,2.23858,51.5,5L51.5,54C51.5,56.7614,34.7614,71,32,71L5,71C2.23858,71,0,68.7614,0,66L0,5C0,2.23858,2.23858,0,5,0Z" transform="translate(232.759,541.5) translate(-25.75,-35.5)"/>
+    <text fill="#ff0200" font-size="37" font-weight="700" letter-spacing="0" word-spacing="0" text-anchor="middle" stroke="none" transform="translate(86.9391,553.007)" style="line-height: 16px; white-space: pre;">S</text>
+    <text fill="#ff0000" font-size="37" letter-spacing="0" word-spacing="0" stroke="none" font-weight="700" text-anchor="middle" transform="translate(151.633,53)" style="line-height: 16px;">Coming Soon...</text>
+    <text fill="#ffffff" font-size="31" letter-spacing="0" word-spacing="0" stroke="none" font-weight="700" text-anchor="middle" transform="translate(151.633,247)" style="line-height: 16px; white-space: pre;">XRD, FTIR &amp; NMR</text>
+    <text fill="#ffffff" font-size="26" letter-spacing="0" word-spacing="0" stroke="none" font-weight="700" text-anchor="middle" transform="translate(151.633,208)" style="line-height: 16px; white-space: pre;">Data Matching For</text>
+    <text fill="#ffffff" font-size="28" letter-spacing="0" word-spacing="0" stroke="none" font-weight="700" text-anchor="middle" transform="translate(149.336,438)" style="line-height: 16px; white-space: pre;">Your Personal</text>
+    <text fill="#ffffff" font-size="28" letter-spacing="0" word-spacing="0" stroke="none" font-weight="700" text-anchor="middle" transform="translate(153.168,472.388)" style="line-height: 16px; white-space: pre;">Scientific Profile</text>
+    <text fill="#ffffff" font-size="25" letter-spacing="0" word-spacing="0" stroke="none" font-weight="700" text-anchor="middle" transform="translate(151.633,679.275)" style="line-height: 20px; white-space: pre;">Excel File...</text>
+    <text fill="#ffffff" font-size="25" letter-spacing="0" word-spacing="0" stroke="none" font-weight="700" text-anchor="middle" transform="translate(153.168,617.225)" style="line-height: 20px; white-space: pre;">Instruments Scientific</text>
+    <path d="M0,0L0,65" stroke="#ffffff" fill="none" stroke-linecap="square" stroke-width="4" transform="translate(85.5,78.5)"/>
+    <path d="M0,0L-122,0" stroke="#ffffff" fill="none" stroke-linecap="square" stroke-width="4" transform="translate(207.5,143.5)"/>
+    <g transform="translate(146.5,158.875) translate(-61,-8.125)">
+        <path d="M0,0L122,0" stroke="#ff0000" fill="none" stroke-width="4" stroke-linecap="square" transform="translate(0,16.25)"/>
+        <path d="M0,0L0,-11" stroke="#ff0000" fill="none" stroke-width="4" stroke-linecap="square" transform="translate(27.5,16.25)"/>
+        <path d="M0,0L0,-5.5" stroke="#ff0000" fill="none" stroke-width="4" stroke-linecap="square" transform="translate(55.5,16.25)"/>
+        <path d="M0,0L0,-13" stroke="#ff0000" fill="none" stroke-width="4" stroke-linecap="square" transform="translate(100.5,13)"/>
+    </g>
+    <path d="M0,0L-13.6506,-0.119742C-19.46,-52.2612,-24.87,-78.3826,-28.6798,-0.251577L-57.9771,-0.508571C-63.713,-14.2966,-69.0229,-15.7224,-73.7642,-0.647055L-86.9086,-0.762357C-93.2706,-61.5522,-97.9605,-39.7077,-102.307,-0.89743L-114,-1" stroke="#ffffff" fill="none" stroke-linecap="square" stroke-width="2" transform="translate(207.5,133.5)"/>
+    <path fill="#ffffff" stroke="none" d="M0,0L30.4675,0L43.2445,9.81832L31.0719,19.2543L0,19.2543Z" transform="translate(146.628,541.5) translate(-16.6223,-12.3814)"/>
+    <rect width="41.4771" height="41.4771" fill="#108933" rx="5" stroke="none" transform="translate(214.009,538.5) translate(-20.7385,-20.7385)"/>
+    <text fill="#ffffff" font-size="37" font-weight="700" letter-spacing="0" word-spacing="0" text-anchor="middle" stroke="none" transform="translate(214.009,552.007)" style="line-height: 16px; white-space: pre;">X</text>
+    <rect width="117" height="123.904" fill="#ffffff" rx="5" stroke="none" transform="translate(151.633,341.952) translate(-58.5,-61.9519)"/>
+    <ellipse rx="19.5" ry="19.5" fill="#cfcfcf" stroke="none" transform="translate(124.5,311.5)"/>
+    <ellipse rx="8" ry="8" fill="#797979" stroke="none" transform="translate(124.5,304)"/>
+    <path fill="#797979" stroke="none" d="M16.5,0C16.5,3.31371,9.6127,10,0.5,10C-8.6127,10,-16.5,3.31371,-16.5,0C-16.5,-3.31371,-8.6127,-8,0.5,-8C9.6127,-8,16.5,-3.31371,16.5,0Z" transform="translate(125,321) translate(-0.5,0)"/>
+    <rect width="39" height="7.5" fill="#817d7d" rx="0" stroke="none" transform="translate(176.5,307.75) translate(-19.5,-3.75)"/>
+    <rect width="85.664" height="7.5" fill="#817d7d" rx="0" stroke="none" transform="translate(129.836,350) translate(-19.5,-3.75)"/>
+    <rect width="85.664" height="7.5" fill="#817d7d" rx="0" stroke="none" transform="translate(129.836,370) translate(-19.5,-3.75)"/>
+    <rect width="85.664" height="7.5" fill="#817d7d" rx="0" stroke="none" transform="translate(129.836,390) translate(-19.5,-3.75)"/>
+    <text fill="#ffffff" font-size="25" letter-spacing="0" word-spacing="0" stroke="none" font-weight="700" text-anchor="middle" transform="translate(156.16,648.25)" style="line-height: 20px; white-space: pre;">File Conversion To</text>
+</svg>
