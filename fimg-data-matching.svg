@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Keyshape -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" style="white-space: pre;">
+    <defs>
+        <linearGradient id="Gradient-0" x1="150" y1="0" x2="150" y2="198" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#ffb64f"/>
+            <stop offset="1" stop-color="#00e5ff"/>
+        </linearGradient>
+    </defs>
+    <rect width="200" height="200" fill="url(#Gradient-0)" stroke="none" rx="5" transform="translate(150,350) translate(-150,-350)"/>
+    <path d="M0,0L0,65" fill="none" stroke="#ffffff" stroke-linecap="square" stroke-width="4" transform="translate(20.4134,10.2671) scale(1.3047,1.3047)"/>
+    <path d="M0,0L-122,0" fill="none" stroke="#ffffff" stroke-linecap="square" stroke-width="4" transform="translate(179.587,95.0725) scale(1.3047,1.3047)"/>
+    <g transform="translate(100,115.132) scale(1.3047,1.3047) translate(-61,-8.125)">
+        <path d="M0,0L122,0" stroke="#ff0000" fill="none" stroke-width="4" stroke-linecap="square" transform="translate(0,16.25)"/>
+        <path d="M0,0L0,-11" stroke="#ff0000" fill="none" stroke-width="4" stroke-linecap="square" transform="translate(27.5,16.25)"/>
+        <path d="M0,0L0,-5.5" stroke="#ff0000" fill="none" stroke-width="4" stroke-linecap="square" transform="translate(55.5,16.25)"/>
+        <path d="M0,0L0,-13" stroke="#ff0000" fill="none" stroke-width="4" stroke-linecap="square" transform="translate(100.5,13)"/>
+    </g>
+    <path d="M0,0L-13.6506,-0.119742C-19.46,-52.2612,-24.87,-78.3826,-28.6798,-0.251577L-57.9771,-0.508571C-63.713,-14.2966,-69.0229,-15.7224,-73.7642,-0.647055L-86.9086,-0.762357C-93.2706,-61.5522,-97.9605,-39.7077,-102.307,-0.89743L-114,-1" stroke="#ffffff" fill="none" stroke-linecap="square" stroke-width="3" transform="translate(179.587,82.0255) scale(1.3047,1.3047)"/>
+    <text fill="#ffffff" font-size="20" font-family="Ubuntu" letter-spacing="0" word-spacing="0" stroke="none" font-weight="700" text-anchor="middle" transform="translate(100,152)" style="line-height: 20px;">XRD and FTIR
+Automatic 
+Data Matching</text>
+</svg>
