@@ -39,7 +39,7 @@ var cA = $('#txt').val().match(/c \(Å\):([.\w+\-\s]+) ?\n/i);
 var Alpha = $('#txt').val().match(/Alpha \(°\):([.\w+\-\s]+) ?\n/i);
 var Beta = $('#txt').val().match(/Beta \(°\):([.\w+\-\s]+) ?\n/i);
 var Gamma = $('#txt').val().match(/Gamma \(°\):([.\w+\-\s]+) ?\n/i);
-var PeakDump = $('#txt').val().match(/Peak list\n\n([\[\]%.\w+\-\s]+) ?Stick/i);
+var PeakDump = $('#txt').val().match(/[%]]([\[\]%.\w+\-\s]+) ?Stick/i);
 var PeakList = $('#PeakDump').html().replace(/\n+/g, '%0A \n');
 
 $("#MaterialName").html(MaterialName ? MaterialName[1] : "-")
@@ -61,3 +61,4 @@ $('#furl').html('https://instanano.com/xrd-reference/?MaterialName='+$('#Materia
 });
 });
 </script>
+
