@@ -1,0 +1,63 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<textarea id='txt'></textarea>
+<div style='display:none'>
+<div class='basic-details'>
+<span>Material Name:</span> <span id="MaterialName"></span><br>
+<span>Other Names:</span> <span id="OtherNames"> -</span><br>
+<span>Chemical Formula:</span> <span id="ChemicalFormula"></span><br>
+<span>Empirical Formula:</span> <span id="EmpiricalFormula"></span><br>
+<span>Reference Code:</span> <span id="ReferenceCode"></span>
+</div>
+<div class='basic-details'>
+<span>Crystal Structure:</span> <span id="CrystalStructure"></span><br>
+<span>a (Å):</span> <span id="aA"></span><br>
+<span>b (Å):</span> <span id="bA"></span><br>
+<span>c (Å):</span> <span id="cA"></span><br>
+<span>Alpha (°):</span> <span id="Alpha"></span><br>
+<span>Beta (°):</span> <span id="Beta"></span><br>
+<span>Gamma (°):</span> <span id="Gamma"></span>
+</div>
+<div class='basic-details'>
+<div style='display:none'><span>Peak List:</span> <span id="PeakDump"></span></div>
+<span>Peak List:</span><br>
+<span id="PeakList" style='white-space:pre'></span>
+</div><br><br></div>
+<br><br>
+<span id='furl' style='white-space:pre' contenteditable="true"></span>
+
+<script>
+$(document).ready(function(){
+$('#txt').bind("change keyup input",function() {
+var MaterialName = $('#txt').val().match(/Compound name:([()\[\]\*\.,\w+\-\s]+) ?\n/i);
+var EmpiricalFormula = $('#txt').val().match(/Empirical formula:([\w+\-\s]+) ?\n/i);
+var ChemicalFormula = $('#txt').val().match(/Chemical formula:([[()\[\]\*\.,·\w+\-\s]+) ?\n\n\n/i);
+var ReferenceCode = $('#txt').val().match(/Reference code:([\w+\-\s]+) ?\n/i);
+var CrystalStructure = $('#txt').val().match(/Crystal system:([\w+\-\s]+) ?\n/i);
+var aA = $('#txt').val().match(/a \(Å\):([.\w+\-\s]+) ?\n/i);
+var bA = $('#txt').val().match(/b \(Å\):([.\w+\-\s]+) ?\n/i);
+var cA = $('#txt').val().match(/c \(Å\):([.\w+\-\s]+) ?\n/i);
+var Alpha = $('#txt').val().match(/Alpha \(°\):([.\w+\-\s]+) ?\n/i);
+var Beta = $('#txt').val().match(/Beta \(°\):([.\w+\-\s]+) ?\n/i);
+var Gamma = $('#txt').val().match(/Gamma \(°\):([.\w+\-\s]+) ?\n/i);
+var PeakDump = $('#txt').val().match(/Peak list\n\n([\[\]%.\w+\-\s]+) ?Stick/i);
+var PeakList = $('#PeakDump').html().replace(/\n+/g, '%0A \n');
+
+$("#MaterialName").html(MaterialName ? MaterialName[1] : "-")
+$("#EmpiricalFormula").html(EmpiricalFormula ? EmpiricalFormula[1] : "-")
+$("#ChemicalFormula").html(ChemicalFormula ? ChemicalFormula[1] : "-")
+$("#ReferenceCode").html(ReferenceCode ? ReferenceCode[1] : "-")
+$("#CrystalStructure").html(CrystalStructure ? CrystalStructure[1] : "-")
+$("#aA").html(aA ? aA[1] : "-")
+$("#bA").html(bA ? bA[1] : "-")
+$("#cA").html(cA ? cA[1] : "-")
+$("#Alpha").html(Alpha ? Alpha[1] : "-")
+$("#Beta").html(Beta ? Beta[1] : "-")
+$("#Gamma").html(Gamma ? Gamma[1] : "-")
+$("#PeakDump").html(PeakDump ? PeakDump[1] : "-")
+$("#PeakList").text(PeakList);
+
+$('#furl').html('https://instanano.com/xrd-reference/?MaterialName='+$('#MaterialName').html()+'&OtherNames='+$('#OtherNames').html()+'&ChemicalFormula='+$('#ChemicalFormula').html()+'&EmpiricalFormula='+$('#EmpiricalFormula').html()+'&ReferenceCode='+$('#ReferenceCode').html()+'&CrystalStructure='+$('#CrystalStructure').html()+'&aA='+$('#aA').html()+'&bA='+$('#bA').html()+'&cA='+$('#cA').html()+'&Alpha='+$('#Alpha').html()+'&Beta='+$('#Beta').html()+'&Gamma='+$('#Gamma').html()+'&PeakList='+$('#PeakList').html());
+
+});
+});
+</script>
