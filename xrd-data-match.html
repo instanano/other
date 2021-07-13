@@ -33,7 +33,7 @@
   <div class='subleft' style='flex:0 0 30%'>
   <span style='font-size:1.2vw;color:red'><b>2nd Match:</b><span contenteditable="true"> Copper Oxide</span></span><br>
   <span contenteditable="true" style='font-size:0.8vw;color:red'>(00-01-1234)</span><br>
-  <span class='details2' style='font-size:1vw;filter:blur(2px)'>
+  <span class='details2' style='font-size:1vw;filter:blur(3px)'>
   <b>Other Names:</b><span contenteditable="true"> Copper Salt</span><br>
   <b>Chemical Formula:</b><span contenteditable="true"> CuNO3</span><br>
   <b>Empirical Formula:</b><span contenteditable="true"> CuNO3</span><br>
@@ -51,7 +51,7 @@
   <div class='subleft' style='flex:0 0 30%'>
   <span style='font-size:1.2vw;color:red'><b>3rd Match:</b><span contenteditable="true"> Copper Oxide</span></span><br>
   <span contenteditable="true" style='font-size:0.8vw;color:red'>(00-01-1234)</span><br>
-  <span class='details3' style='font-size:1vw;filter:blur(2px)'>
+  <span class='details3' style='font-size:1vw;filter:blur(3px)'>
   <b>Other Names:</b><span contenteditable="true"> Copper Salt</span><br>
   <b>Chemical Formula:</b><span contenteditable="true"> CuNO3</span><br>
   <b>Empirical Formula:</b><span contenteditable="true"> CuNO3</span><br>
@@ -247,7 +247,7 @@ $(document).ready(function() {
   
   $('#2nd').change(function() {
   if ($(this).is(':checked')) {
-    $('.details2').css('filter','blur(2px)');
+    $('.details2').css('filter','blur(3px)');
     $('.match2i,.match2iup').css('background','rgba(255,0,0,0.2)').css('filter','blur(5px)');
   } else {
     $('.details2').css('filter','blur(0px)')
@@ -257,7 +257,7 @@ $(document).ready(function() {
   
   $('#3rd').change(function() {
   if ($(this).is(':checked')) {
-    $('.details3').css('filter','blur(2px)');
+    $('.details3').css('filter','blur(3px)');
     $('.match3i,.match3iup').css('background','rgba(255,0,0,0.2)').css('filter','blur(5px)');
   } else {
     $('.details3').css('filter','blur(0px)')
