@@ -1,0 +1,233 @@
+<div class='main' style='max-width:1200px;margin:0 auto;display:flex'>
+
+<div class='leftbar' style='flex:0 0 75%'>
+ <div style='display:flex'>
+  <div class='subleft' style='flex:0 0 30%'>
+  Your Sample
+  </div>
+  <div class='subrigth' style='flex:0 0 70%'>
+   <div id='chartdiv'></div>
+  </div>
+ </div>
+
+ <div style='display:flex'>
+  <div class='subleft' style='flex:0 0 30%'>
+  <span style='font-size:1.2vw;color:red'><b>1st Match:</b> Copper Oxide</span><br>
+  <span style='font-size:0.8vw;color:red'>(00-01-1234)</span><br>
+  <span style='font-size:1vw'>
+  <b>Other Names:</b> Copper Salt <br>
+  <b>Chemical Formula:</b> CuNO3 <br>
+  <b>Empirical Formula:</b> CuNO3<br>
+  <b>Crystal Structure:</b> Cubic<br>
+  <b>a=</b> 0.24, <b>b=</b> 0.24, <b>c=</b> 0.24<br> 
+  <b>Alpha=</b> 90, <b>Beta=</b> 90, <b>Gamma=</b> 90</span>
+  </div>
+  <div class='subrigth' style='flex:0 0 70%'>
+   <div class='match1i' style='position:relative;background:#eee;padding-top:18%' />
+   </div>
+  </div>
+ </div>
+ 
+ <div style='display:flex'>
+  <div class='subleft' style='flex:0 0 30%'>
+  <span style='font-size:1.2vw;color:red'><b>2nd Match:</b> Copper Oxide</span><br>
+  <span style='font-size:0.8vw;color:red'>(00-01-1234)</span><br>
+  <span style='font-size:1vw'>
+  <b>Other Names:</b> Silver Salt <br>
+  <b>Chemical Formula:</b> CuNO3 <br>
+  <b>Empirical Formula:</b> CuNO3<br>
+  <b>Crystal Structure:</b> Cubic<br>
+  <b>a=</b> 0.24, <b>b=</b> 0.24, <b>c=</b> 0.24<br> 
+  <b>Alpha=</b> 90, <b>Beta=</b> 90, <b>Gamma=</b> 90</span>
+  </div>
+  <div class='subrigth' style='flex:0 0 70%'>
+   <div class='match2i' style='position:relative;background:#eee;padding-top:18%' />
+   </div>
+  </div>
+ </div>
+ 
+  <div style='display:flex'>
+  <div class='subleft' style='flex:0 0 30%'>
+  <span style='font-size:1.2vw;color:red'><b>3rd Match:</b> Gold Oxide</span><br>
+  <span style='font-size:0.8vw;color:red'>(00-01-1234)</span><br>
+  <span style='font-size:1vw'>
+  <b>Other Names:</b> Silver Salt <br>
+  <b>Chemical Formula:</b> CuNO3 <br>
+  <b>Empirical Formula:</b> CuNO3<br>
+  <b>Crystal Structure:</b> Cubic<br>
+  <b>a=</b> 0.24, <b>b=</b> 0.24, <b>c=</b> 0.24<br> 
+  <b>Alpha=</b> 90, <b>Beta=</b> 90, <b>Gamma=</b> 90</span>
+  </div>
+  <div class='subrigth' style='flex:0 0 70%'>
+   <div class='match3i' style='position:relative;background:#eee;padding-top:18%' />
+   </div>
+  </div>
+ </div>
+
+</div>
+
+<div class='rightbar' style='flex:0 0 25%'>
+<textarea id='dinput'>
+0	1654
+10	1254
+18	1254
+20	5654
+22	1154
+30	1243
+40	1143
+48	1234
+50	1934
+52	1234
+60	1345
+68	1345
+70	4646
+72	1345
+80	1478
+90	1433
+</textarea>
+<textarea class='position1'></textarea>
+<textarea class='height1'></textarea>
+<textarea class='label1'></textarea>
+<textarea class='position2'></textarea>
+<textarea class='height2'></textarea>
+<textarea class='label2'></textarea>
+<textarea class='position3'></textarea>
+<textarea class='height3'></textarea>
+<textarea class='label3'></textarea>
+</div>
+
+</div>
+
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script>
+document.getElementById('dinput').addEventListener('paste', function (e) {
+document.getElementById('dinput').addEventListener('input', function () {
+d3.selectAll('.graph').remove();
+drawChart(getData());
+drawChart2(getData2());
+});});
+function mainData(){
+var data = document.getElementById('dinput').value.trim().split('\n').map(line => {
+let tokens = line.trim().split(/\s+/).map(str => Number(str, 10));
+return { x: tokens[0], y: tokens[1] }
+});return data;};
+
+function getData(){ 
+data1 = mainData();
+return data1};
+function drawChart(data) {
+var xExtent = d3.extent(data, function(d) { return d.x; }),
+xRange = xExtent[1] - xExtent[0],
+yExtent = d3.extent(data, function(d) { return d.y; }).reverse(),
+yRange = yExtent[1] - yExtent[0];
+var xScale = d3.scaleLinear().range([20, 1235]).domain([0, 90]);
+var yScale = d3.scaleLinear().range([0, 415]).domain([yExtent[0] - (yRange * .1), yExtent[1] + (yRange * .05)]);
+
+var line = d3.line()
+.x(function(d, x) { return xScale(d.x); })
+.y(function(d, y) { return yScale(d.y); })
+.curve(d3.curveMonotoneX);
+
+d3.select('#chartdiv')
+.append('svg')
+.attr('class','graph')
+.attr("viewBox", "0 0 1280 450");
+
+var svg = d3.select(".graph")
+.append("g")
+.attr("class", "dchart")
+.attr("transform", "translate(0, 0)");
+
+svg.append("g")
+.attr("class", "x axis")
+.attr("transform", "translate(0, 415)")
+.call(d3.axisBottom(xScale).ticks(20))
+.attr('font-size','25px');
+ 
+d3.select('.dchart')
+.append('text')
+.text('2θ')
+.attr('x', 1210)
+.attr('y', 660)
+.style('font-size','40px');
+
+svg.append("g")
+.attr("class", "y axis")
+.call(d3.axisLeft(yScale).ticks(1))
+.attr("transform", "translate(20, 0)")
+.attr('font-size','0px');
+
+svg.append("path")
+.datum(data)
+.attr("class", "line")
+.attr("d", line);
+
+var i=1;
+var m=1;
+svg.selectAll(".dot")
+.data(data)
+.enter()
+.append("circle")
+.attr("class", "dot")
+.attr("cx", function(d) { return xScale(d.x) })
+.attr("cy", function(d) { return yScale(d.y) })
+.attr("r", 3)
+.on("mouseover", function(d) { 
+svg.append("text")
+.attr('class','annot')
+.attr('x', xScale(d.x) - 20)
+.attr('y', yScale(d.y) - 10)
+.text(d.x)
+.style('font-size','30px')
+svg.append('line')
+.attr('class','annot')
+.style("stroke", "black")
+.attr('stroke-width','3')
+.attr("x1", xScale(d.x))
+.attr("y1", yScale(d.y))
+.attr("x2", xScale(d.x))
+.attr("y2", 750);
+})
+.on("mouseout", function() {  
+d3.selectAll('.annot').remove()
+})    
+}drawChart(getData());
+</script>
+
+<style>
+.line {fill:none;stroke:blue;stroke-width:3}
+.dot {fill: darkblue;stroke-width:0}
+.peak1,.peak2,.peak3{background:red;height:100%;width:0.5%;position:absolute;bottom:0}
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+  $('.position1, .height1, .label1').on("input", function() {
+    var pos1 = $('.position1').val().split(',');
+    var hght1 = $('.height1').val().split(',');
+    var lbl1 = $('.label1').val().split(',');
+    $('.peak1').remove();
+    let html = pos1.map((p, i) => `<div class='peak1' style='left:${pos1[i]}%;height:${hght1[i]}%'>${lbl1[i]?lbl1[i]:''}</div>`);
+    $('.match1i').html(html)
+  });
+  
+    $('.position2, .height2, .label2').on("input", function() {
+    var pos2 = $('.position2').val().split(',');
+    var hght2 = $('.height2').val().split(',');
+    var lbl2 = $('.label2').val().split(',');
+    $('.peak2').remove();
+    let html = pos2.map((p, i) => `<div class='peak2' style='left:${pos2[i]}%;height:${hght2[i]}%'>${lbl2[i]?lbl2[i]:''}</div>`);
+    $('.match2i').html(html)
+  });
+  
+    $('.position3, .height3, .label3').on("input", function() {
+    var pos3 = $('.position3').val().split(',');
+    var hght3 = $('.height3').val().split(',');
+    var lbl3 = $('.label3').val().split(',');
+    $('.peak3').remove();
+    let html = pos3.map((p, i) => `<div class='peak3' style='left:${pos3[i]}%;height:${hght3[i]}%'>${lbl3[i]?lbl3[i]:''}</div>`);
+    $('.match3i').html(html)
+  });
+});
+</script>
