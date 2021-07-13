@@ -23,7 +23,7 @@
   <b>Alpha=</b> 90, <b>Beta=</b> 90, <b>Gamma=</b> 90</span>
   </div>
   <div class='subrigth' style='flex:0 0 70%'>
-   <div class='match1i' style='position:relative;background:#eee;padding-top:18%' />
+   <div class='match1i'/>
    </div>
   </div>
  </div>
@@ -41,7 +41,7 @@
   <b>Alpha=</b> 90, <b>Beta=</b> 90, <b>Gamma=</b> 90</span>
   </div>
   <div class='subrigth' style='flex:0 0 70%'>
-   <div class='match2i' style='position:relative;background:#eee;padding-top:18%' />
+   <div class='match2i'/>
    </div>
   </div>
  </div>
@@ -59,7 +59,7 @@
   <b>Alpha=</b> 90, <b>Beta=</b> 90, <b>Gamma=</b> 90</span>
   </div>
   <div class='subrigth' style='flex:0 0 70%'>
-   <div class='match3i' style='position:relative;background:#eee;padding-top:18%' />
+   <div class='match3i'/>
    </div>
   </div>
  </div>
@@ -197,7 +197,9 @@ d3.selectAll('.annot').remove()
 <style>
 .line {fill:none;stroke:blue;stroke-width:3}
 .dot {fill: darkblue;stroke-width:0}
+.match1i,.match2i,.match3i{position:relative;background:#eee;padding-top:18%;margin-bottom:5%}
 .peak1,.peak2,.peak3{background:red;height:100%;width:0.5%;position:absolute;bottom:0}
+.peak1 > span,.peak2 > span,.peak3 > span{position:absolute;bottom:-22px;font-size:0.8vw;color:blue;line-height:10px;text-align:center;left:10px}
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -208,7 +210,7 @@ $(document).ready(function() {
     var hght1 = $('.height1').val().split(',');
     var lbl1 = $('.label1').val().split(',');
     $('.peak1').remove();
-    let html = pos1.map((p, i) => `<div class='peak1' style='left:${pos1[i]}%;height:${hght1[i]}%'>${lbl1[i]?lbl1[i]:''}</div>`);
+    let html = pos1.map((p, i) => `<div class='peak1' style='left:${pos1[i]}%;height:${hght1[i]}%'><span>${lbl1[i]?lbl1[i]:''}</span></div>`);
     $('.match1i').html(html)
   });
   
@@ -217,7 +219,7 @@ $(document).ready(function() {
     var hght2 = $('.height2').val().split(',');
     var lbl2 = $('.label2').val().split(',');
     $('.peak2').remove();
-    let html = pos2.map((p, i) => `<div class='peak2' style='left:${pos2[i]}%;height:${hght2[i]}%'>${lbl2[i]?lbl2[i]:''}</div>`);
+    let html = pos2.map((p, i) => `<div class='peak2' style='left:${pos2[i]}%;height:${hght2[i]}%'><span>${lbl2[i]?lbl2[i]:''}</span></div>`);
     $('.match2i').html(html)
   });
   
@@ -226,7 +228,7 @@ $(document).ready(function() {
     var hght3 = $('.height3').val().split(',');
     var lbl3 = $('.label3').val().split(',');
     $('.peak3').remove();
-    let html = pos3.map((p, i) => `<div class='peak3' style='left:${pos3[i]}%;height:${hght3[i]}%'>${lbl3[i]?lbl3[i]:''}</div>`);
+    let html = pos3.map((p, i) => `<div class='peak3' style='left:${pos3[i]}%;height:${hght3[i]}%'><span>${lbl3[i]?lbl3[i]:''}</span></div>`);
     $('.match3i').html(html)
   });
 });
