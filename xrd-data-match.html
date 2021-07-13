@@ -1,5 +1,5 @@
 <link rel='stylesheet' id='google-fonts-css' href='//fonts.googleapis.com/css?family=Ubuntu%3A400%2C700&#038;ver=5.7.2#038;display=swap&#038;ver=5.7.1' type='text/css' media='all'/>
-<div class='main' style='max-width:1200px;margin:0 auto;display:flex;background:linear-gradient(90deg,#1fc59f,#9DDA3E);font-family:ubuntu;color:#444'>
+<div class='main' style='margin:0 auto;display:flex;background:linear-gradient(90deg,#1fc59f,#9DDA3E);font-family:ubuntu;color:#444'>
 
 <div class='leftbar' style='flex:0 0 80%;padding:150px 20px 20px 20px'>
  <div style='display:flex'>
@@ -203,13 +203,14 @@ d3.selectAll('.annot').remove()
 </script>
 
 <style>
+body{margin:0}
 .line {fill:none;stroke:darkblue;stroke-width:3}
 .dot {fill:rgba(0,0,0,0);stroke-width:0}
 .match1i,.match2i,.match3i{position:relative;background:#eee;padding-top:18%;margin-bottom:5%;margin:0 16px 5% 10px}
 .peak1,.peak2,.peak3{background:red;height:100%;width:0.5%;position:absolute;bottom:0}
 .peak1 > span,.peak2 > span,.peak3 > span{position:absolute;bottom:-22px;font-size:0.7vw;color:red;line-height:10px;text-align:center;left:-8px}
 .match2i,.match3i{background:rgba(255,0,0,0.2);filter:blur(5px)}
-textarea{width:100%;height:70px}
+textarea{width:82%;height:70px}
 </style> 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
