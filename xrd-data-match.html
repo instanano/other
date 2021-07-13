@@ -24,8 +24,8 @@
   <b>Alpha=</b><span contenteditable="true"> 90</span>, <b>Beta=</b><span contenteditable="true"> 90</span>, <b>Gamma=</b><span contenteditable="true"> 90</span></span>
   </div>
   <div class='subrigth' style='flex:0 0 70%'>
-   <div class='match1i'/>
-   </div>
+   <div class='match1iup'></div>
+   <div class='match1i'/></div>
   </div>
  </div>
  
@@ -42,8 +42,8 @@
   <b>Alpha=</b><span contenteditable="true"> 90</span>, <b>Beta=</b><span contenteditable="true"> 90</span>, <b>Gamma=</b><span contenteditable="true"> 90</span></span>
   </div>
   <div class='subrigth' style='flex:0 0 70%'>
-   <div class='match2i'/>
-   </div>
+   <div class='match2iup'></div>
+   <div class='match2i'></div>
   </div>
  </div>
  
@@ -60,8 +60,8 @@
   <b>Alpha=</b><span contenteditable="true"> 90</span>, <b>Beta=</b><span contenteditable="true"> 90</span>, <b>Gamma=</b><span contenteditable="true"> 90</span></span>
   </div>
   <div class='subrigth' style='flex:0 0 70%'>
-   <div class='match3i'/>
-   </div>
+   <div class='match3iup'></div>
+   <div class='match3i'></div>
   </div>
  </div>
 
@@ -206,11 +206,12 @@ d3.selectAll('.annot').remove()
 body{margin:0}
 .line {fill:none;stroke:darkblue;stroke-width:3}
 .dot {fill:rgba(0,0,0,0);stroke-width:0}
-.match1i,.match2i,.match3i{position:relative;background:#eee;padding-top:18%;margin-bottom:5%;margin:0 16px 5% 10px}
+.match1i,.match2i,.match3i{position:relative;background:#eee;padding-top:18%;margin-bottom:5%;margin:0 2.6% 5% 1.5%}
 .peak1,.peak2,.peak3{background:red;height:100%;width:0.5%;position:absolute;bottom:0}
-.match2i,.match3i{background:rgba(255,0,0,0.2);filter:blur(5px)}
+.match1iup,.match2iup,.match3iup{position:relative;background:#eee;height:22px;margin:0 2.6% 0 1.5%}
+.match2i,.match3i,.match2iup,.match3iup{background:rgba(255,0,0,0.2);filter:blur(5px)}
 textarea{width:82%;height:70px}
-.pklbl{position:absolute;top:-12px;font-size:0.7vw;color:red;line-height:10px;text-align:center;left:-8px}
+.pklbl{position:absolute;top:-20px;font-size:0.7vw;color:red;line-height:10px;text-align:center;left:-8px}
 .poslbl{position:absolute;bottom:-10px;font-size:0.7vw;color:black;text-align:center;left:-9px}
 </style> 
 
@@ -247,20 +248,20 @@ $(document).ready(function() {
   $('#2nd').change(function() {
   if ($(this).is(':checked')) {
     $('.details2').css('filter','blur(2px)');
-    $('.match2i').css('background','rgba(255,0,0,0.2)').css('filter','blur(5px)');
+    $('.match2i,.match2iup').css('background','rgba(255,0,0,0.2)').css('filter','blur(5px)');
   } else {
     $('.details2').css('filter','blur(0px)')
-    $('.match2i').css('background','#eee').css('filter','blur(0px)');
+    $('.match2i,.match2iup').css('background','#eee').css('filter','blur(0px)');
   }
   });
   
   $('#3rd').change(function() {
   if ($(this).is(':checked')) {
     $('.details3').css('filter','blur(2px)');
-    $('.match3i').css('background','rgba(255,0,0,0.2)').css('filter','blur(5px)');
+    $('.match3i,.match3iup').css('background','rgba(255,0,0,0.2)').css('filter','blur(5px)');
   } else {
     $('.details3').css('filter','blur(0px)')
-    $('.match3i').css('background','#eee').css('filter','blur(0px)');
+    $('.match3i,.match3iup').css('background','#eee').css('filter','blur(0px)');
   }
   });
   
