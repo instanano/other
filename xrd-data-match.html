@@ -6,7 +6,7 @@
   Your Sample
   </div>
   <div class='subrigth' style='flex:0 0 70%'>
-   <div id='chartdiv'></div>
+   <div id='chartdiv' style='margin-bottom:3%'></div>
   </div>
  </div>
 
@@ -120,7 +120,7 @@ var xExtent = d3.extent(data, function(d) { return d.x; }),
 xRange = xExtent[1] - xExtent[0],
 yExtent = d3.extent(data, function(d) { return d.y; }).reverse(),
 yRange = yExtent[1] - yExtent[0];
-var xScale = d3.scaleLinear().range([20, 1235]).domain([0, 90]);
+var xScale = d3.scaleLinear().range([20, 1250]).domain([0, 100]);
 var yScale = d3.scaleLinear().range([0, 415]).domain([yExtent[0] - (yRange * .1), yExtent[1] + (yRange * .05)]);
 
 var line = d3.line()
@@ -197,7 +197,7 @@ d3.selectAll('.annot').remove()
 <style>
 .line {fill:none;stroke:blue;stroke-width:3}
 .dot {fill: darkblue;stroke-width:0}
-.match1i,.match2i,.match3i{position:relative;background:#eee;padding-top:18%;margin-bottom:5%}
+.match1i,.match2i,.match3i{position:relative;background:#eee;padding-top:18%;margin-bottom:5%;margin:0 14px 0 10px}
 .peak1,.peak2,.peak3{background:red;height:100%;width:0.5%;position:absolute;bottom:0}
 .peak1 > span,.peak2 > span,.peak3 > span{position:absolute;bottom:-22px;font-size:0.7vw;color:blue;line-height:10px;text-align:center;left:-8px}
 </style> 
