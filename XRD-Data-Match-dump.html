@@ -1,7 +1,7 @@
 <link rel='stylesheet' id='google-fonts-css' href='//fonts.googleapis.com/css?family=Ubuntu%3A400%2C700&#038;ver=5.7.2#038;display=swap&#038;ver=5.7.1' type='text/css' media='all'/>
-<div class='main' style='margin:0 auto;display:flex;background:linear-gradient(90deg,#1fc59f,#9DDA3E);font-family:ubuntu;color:#444'>
+<div class='main' style='margin:0 auto;display:flex;background:linear-gradient(90deg,#1fc59f,#9DDA3E);font-family:ubuntu;color:#444;justify-content:space-between}'>
 
-<div class='leftbar' style='flex:0 0 80%;padding:150px 20px 20px 20px'>
+<div class='leftbar' style='flex:0 0 85%;padding:150px 20px 20px 20px;box-sizing:border-box'>
  <div style='display:flex'>
   <div class='subleft' style='flex:0 0 30%'>
   <span contenteditable="true" style='font-size:22px;font-weight:bold;color:#444;position:absolute;margin-top:7%'>Order #8934<br>
@@ -16,9 +16,9 @@ XRD Data Matching</span>
   <div class='subleft' style='flex:0 0 30%'>
   <span style='font-size:1.2vw;color:red'><b>1st Match:</b><span contenteditable="true"> Copper Oxide</span></span><br>
   <span contenteditable="true" style='font-size:0.8vw;color:red'>(00-01-1234)</span><br>
+  <span style='font-size:1.1vw'><b>Chemical Formula:</b><span contenteditable="true"> CuNO3</span><br>
   <span class='details1' style='font-size:1.1vw;filter:blur(4px)'>
   <b>Other Names:</b><span contenteditable="true"> Copper Salt</span><br>
-  <b>Chemical Formula:</b><span contenteditable="true"> CuNO3</span><br>
   <b>Empirical Formula:</b><span contenteditable="true"> CuNO3</span><br>
   <b>Crystal Structure:</b><span contenteditable="true"> Cubic</span><br>
   <b>a=</b><span contenteditable="true"> 0.24</span>, <b>b=</b><span contenteditable="true"> 0.24</span>, <b>c=</b><span contenteditable="true"> 0.24</span><br> 
@@ -34,9 +34,9 @@ XRD Data Matching</span>
   <div class='subleft' style='flex:0 0 30%'>
   <span style='font-size:1.2vw;color:red'><b>2nd Match:</b><span contenteditable="true"> Copper Oxide</span></span><br>
   <span contenteditable="true" style='font-size:0.8vw;color:red'>(00-01-1234)</span><br>
+  <span style='font-size:1.1vw'><b>Chemical Formula:</b><span contenteditable="true"> CuNO3</span><br>
   <span class='details2' style='font-size:1.1vw;filter:blur(4px)'>
   <b>Other Names:</b><span contenteditable="true"> Copper Salt</span><br>
-  <b>Chemical Formula:</b><span contenteditable="true"> CuNO3</span><br>
   <b>Empirical Formula:</b><span contenteditable="true"> CuNO3</span><br>
   <b>Crystal Structure:</b><span contenteditable="true"> Cubic</span><br>
   <b>a=</b><span contenteditable="true"> 0.24</span>, <b>b=</b><span contenteditable="true"> 0.24</span>, <b>c=</b><span contenteditable="true"> 0.24</span><br> 
@@ -52,9 +52,9 @@ XRD Data Matching</span>
   <div class='subleft' style='flex:0 0 30%'>
   <span style='font-size:1.2vw;color:red'><b>3rd Match:</b><span contenteditable="true"> Copper Oxide</span></span><br>
   <span contenteditable="true" style='font-size:0.8vw;color:red'>(00-01-1234)</span><br>
+  <span style='font-size:1.1vw'><b>Chemical Formula:</b><span contenteditable="true"> CuNO3</span><br>
   <span class='details3' style='font-size:1.1vw;filter:blur(4px)'>
   <b>Other Names:</b><span contenteditable="true"> Copper Salt</span><br>
-  <b>Chemical Formula:</b><span contenteditable="true"> CuNO3</span><br>
   <b>Empirical Formula:</b><span contenteditable="true"> CuNO3</span><br>
   <b>Crystal Structure:</b><span contenteditable="true"> Cubic</span><br>
   <b>a=</b><span contenteditable="true"> 0.24</span>, <b>b=</b><span contenteditable="true"> 0.24</span>, <b>c=</b><span contenteditable="true"> 0.24</span><br> 
@@ -68,7 +68,7 @@ XRD Data Matching</span>
 
 </div>
 
-<div class='rightbar' style='flex:0 0 20%'>
+<div class='rightbar' style='flex:0 0 15%'>
 <textarea id='dinput'>
 0	1654
 10	1254
@@ -213,7 +213,7 @@ body{margin:0}
 .peak1,.peak2,.peak3{background:red;height:100%;width:0.5%;position:absolute;bottom:0}
 .match1iup,.match2iup,.match3iup{position:relative;background:#eee;height:24px;margin:0 2.6% 0 1.5%}
 .match1i,.match2i,.match3i,.match1iup,.match2iup,.match3iup{background:rgba(255,0,0,0.2);filter:blur(5px)}
-textarea{width:82%;height:70px}
+textarea{width:100%;height:70px}
 .pklbl{position:absolute;top:-22px;font-size:0.7vw;color:red;line-height:11px;text-align:center;left:-8px}
 .poslbl{position:absolute;bottom:-12px;font-size:0.7vw;color:black;text-align:center;left:-9px}
 </style> 
@@ -280,4 +280,3 @@ $(document).ready(function() {
   
 });
 </script>
-
