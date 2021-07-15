@@ -384,5 +384,20 @@ $(document).ready(function() {
   }
   });
   
+  $(document).bind('keydown', function(event) {
+    if( event.which === 38 && event.shiftKey ) {
+     $('.rightbar').css('display','block');
+     $('.leftbar').css('flex','0 0 85%');
+     $('.leftbar').css('max-width','1200px');
+     $('.leftbar').css('margin','0 auto');
+    }
+    if( event.which === 40 && event.shiftKey ) {
+     $('.rightbar').css('display','none');
+     $('.leftbar').css('flex','0 0 100%');
+     $('.leftbar').css('max-width','auto');
+    }
+  });
+  
 });
 </script>
+
