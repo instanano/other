@@ -1,0 +1,177 @@
+<?php /* Template Name: Test1 */ get_header(); ?>
+
+<div style="margin-top:150px;display:flex;flex-flow:row wrap;justify-content:space-between">
+
+<div style="flex:0 0 25%;display:flex;flex-direction:column;position:relative;padding:15px 15px 15px 15px;box-sizing:border-box;background:lightgreen">
+<div style="background:lightblue">
+<button id='download'>Download Graph</button>
+</div>
+<span style="">Paste Your Data Here From Excel Sheet...</span>
+<textarea id="dinput" style="height:100%;width:100%;padding:10px;border:none;resize:none;box-sizing:border-box;" >
+200&#09;0.010
+210&#09;0.011
+220&#09;0.011
+230&#09;0.011
+240&#09;0.011
+250&#09;0.011
+260&#09;0.013
+270&#09;0.013
+280&#09;0.013
+290&#09;0.035
+300&#09;0.140
+310&#09;0.425
+320&#09;0.820
+330&#09;1.152
+340&#09;0.802
+350&#09;0.423
+360&#09;0.123
+370&#09;0.040
+380&#09;0.020
+390&#09;0.020
+400&#09;0.020
+410&#09;0.020
+420&#09;0.015
+430&#09;0.013
+440&#09;0.010
+450&#09;0.010
+460&#09;0.010
+470&#09;0.010
+480&#09;0.010
+490&#09;0.010
+500&#09;0.010
+510&#09;0.010
+520&#09;0.010
+530&#09;0.010
+540&#09;0.010
+550&#09;0.010
+560&#09;0.010
+570&#09;0.010
+580&#09;0.010
+590&#09;0.010
+600&#09;0.010
+</textarea>
+</div>
+
+<div style="flex:0 0 75%;display:flex;flex-direction:column;position:relative;height:fit-content;background:#eee">
+<div style="background:lightblue">
+<button id='addtext'>Add Text</button>
+<input type="number" id="updatelinewidth" min="1" max="200" value='3'>
+<button id='download'>Download Graph</button>
+</div>
+<div id="chartdiv"></div>
+<div id="tooltip" style="position:absolute;bottom:8px;right:20px;font-size:12px;color:red;letter-spacing:1px;"></div>
+</div>
+
+<div class="texteditor" style="position:absolute;display:none;background:#e0e0e0;padding:10px;border-radius:5px">
+<input type="number" id="updatenumber" min="1" max="200" value='20'>
+<input type="color" id="updatecolor" value='#000000'>
+<button id='remove'>Remove</button><br>
+<input type="text" id="updatetext" style="width:-webkit-fill-available">
+</div>
+	
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+function mainData(){
+var data = document.getElementById('dinput').value.trim().split('\n').map(line => {
+let tokens = line.trim().split(/\s+/).map(str => Number(str, 10));
+return { x: tokens[0], y: tokens[1] }
+});return data;};	
+
+document.getElementById('dinput').addEventListener('paste', function (e) {
+document.getElementById('dinput').addEventListener('input', function () {
+d3.select(".chart").remove();
+draw();
+});});
+
+async function draw() {
+const dataset = mainData();
+const xAccessor = d => { return d.x; }
+const yAccessor = d => { return d.y; }
+let dimensions = { width: 1280, height: 720, margins: 100,};
+dimensions.ctrWidth = dimensions.width - dimensions.margins * 2
+dimensions.ctrHeight = dimensions.height - dimensions.margins * 2
+const svg = d3.select('#chartdiv').append("svg").classed("chart",true).attr("viewBox", "0 0 "+ dimensions.width +" "+ dimensions.height +"")
+const ctr = svg.append("g").attr("transform",`translate(${dimensions.margins}, ${dimensions.margins})`)
+const yScale = d3.scaleLinear().domain(d3.extent(dataset, yAccessor)).range([dimensions.ctrHeight, 0]).nice();
+const xScale = d3.scaleLinear().domain(d3.extent(dataset, xAccessor)).range([0, dimensions.ctrWidth]).nice();
+const lineGenerator = d3.line().x((d) => xScale(xAccessor(d))).y((d) => yScale(yAccessor(d)))
+ctr.append('path').datum(dataset).attr('d', lineGenerator).attr('fill', 'none').attr('stroke', '#000000').attr('stroke-width', 3).classed("chartline",true)
+ctr.append('g').call(d3.axisLeft(yScale))
+ctr.append('g').style('transform', `translateY(${dimensions.ctrHeight}px)`).call(d3.axisBottom(xScale))
+
+//tooltip
+svg.on("mousemove", function() {
+d3.select("#tooltip").html("X-Axis: <b>" + xScale.invert(d3.pointer(event)[0] - dimensions.margins).toFixed(3) + "</b>" + "<br>Y-Axis: <b>" + yScale.invert(d3.pointer(event)[1] - dimensions.margins).toFixed(3) + "</b>");
+});
+
+//drag
+function dragStart(event,d){ }
+function dragging(event,d){ d3.select(this).attr("x", event.x).attr("y", event.y);d3.select(".texteditor").style("display","none") }
+function dragEnd(event,d){ d3.select(this).style("stroke", "")}
+drag = d3.drag().on("start", dragStart).on("drag", dragging).on("end", dragEnd);
+
+//menu items
+$(".chart").on('click', function() {
+$(".textelement").removeClass("activetext")
+$(".texteditor").css("display","none")
+$("#updatetext").val("")
+$("#updatecolor").val("#000000")
+$("#updatenumber").val("16")
+})
+	
+d3.select("#addtext").on ("click", function() {
+$(".textelement").removeClass("activetext")
+d3.select(".chart").append("text").classed("textelement",true).text("Double Click Me To Edit").attr("x", dimensions.ctrWidth/2).attr("y",200).attr("fill","#000000").attr("font-size",20).call(drag)
+})
+	
+$(".chart").on('dblclick', '.textelement', function() {
+$(".textelement").removeClass("activetext")
+$(this).addClass("activetext")
+$("#updatetext").val($(this).text())	
+$('#updatecolor').val($(this).attr("fill"))
+$('#updatenumber').val($(this).attr("font-size"))
+if ($("#updatetext").val() == "Double Click Me To Edit") {$("#updatetext").val("").attr("placeholder","Write Your Text Here...").focus().select()}
+d3.select(".texteditor").style("display","block")
+d3.select(".texteditor").style("top", event.y - 85 + "px").style("left", event.x - 90 + "px")
+})
+
+$("#updatetext").on('keyup', function() {
+$(".activetext").text( $(this).val() )
+})
+	
+$("#updatecolor").on('input', function() {
+$('.activetext').attr('fill', $(this).val())
+})
+	
+$("#updatenumber").on('input', function() {
+$('.activetext').attr('font-size', $(this).val())
+})
+
+$("#remove").on('click', function() {
+$('.activetext').remove()
+$(".texteditor").css("display","none")
+})
+
+$("#updatelinewidth").on('input', function() {
+$('.chartline,.domain,.tick > line').css('stroke-width', $(this).val())
+})
+	
+
+	
+	
+
+}
+draw()
+</script>
+
+<style>
+.textelement{text-anchor:start;cursor:pointer;text-anchor:middle}
+.activetext{text-decoration:underline}
+.tick > text{font-size:20px}
+.domain,.tick > line{stroke-width:3}
+</style>
+
+<?php get_footer(); ?>
