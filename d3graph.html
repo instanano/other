@@ -1,0 +1,420 @@
+<style>
+*{box-sizing:border-box}
+.line-chart{background-image:url(https://cdn.jsdelivr.net/gh/instanano/chart/linechart.png)}
+.stack-chart{background-image:url(https://cdn.jsdelivr.net/gh/instanano/chart/stackedyaxis.png)}
+.multiscale-chart{background-image:url(https://cdn.jsdelivr.net/gh/instanano/chart/multiyaxis.png)}
+.area-chart{background-image:url(https://cdn.jsdelivr.net/gh/instanano/chart/areachart.png)}
+.bar-chart{background-image:url(https://cdn.jsdelivr.net/gh/instanano/chart/barchart.png)}
+.gselector input{display:none}
+.gselector input:checked +.gselectorl{filter:none;border:2px solid #1fc59f;border-radius:5px} 
+.gselectorl{cursor:pointer;background-size:contain;background-repeat:no-repeat;display:inline-block;width:30%;height:90px;transition: all 100ms ease-in;filter: brightness(1) grayscale(1) opacity(.8)}
+.gselectorl:hover{filter: brightness(1.2) grayscale(.5) opacity(.9)}
+.slider{-webkit-appearance:none;height:10px;border-radius:5px;background:#d3d3d3;outline:none;opacity:0.7;transition:opacity .2s;width:100%;margin:7px 0}
+.slider:hover{opacity:1}
+.slider::-webkit-slider-thumb{appearance:none;width:20px;height:20px;border-radius:50%;background:#04AA6D;cursor:pointer}
+.yaxis0{display:none}
+.textelement{cursor:grab}
+.themebox{background:#fff;border-radius:10px;padding:10px}
+.stroke{stroke-width:2px;}
+.tnum{font-size:16px;width:100%}
+.xcolor{background:gray;color:#fff;padding:0 5px}
+.ycolor{background:lightgray;padding:0 3px}
+#main-logo{position:relative}
+#popup1{display:none}
+.test1 > label{font-size:18px}
+.test1 input:checked +.gselectorl{filter:none;border:2px solid #1fc59f;border-radius:5px} 
+</style>
+<div style="display:flex;padding-top:20px;justify-content:space-around;margin:0 10px">
+<script src="https://d3js.org/d3.v7.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+	
+<div style="width:35%;margin-right:20px">
+<div class="themebox" style="margin-bottom:10px"><span style="font-size:11px;top:-5px;position:relative">Paste data here from excel</span>
+<textarea id="tabsheet" name="values_serie1" style="width:100%;height:150px;box-sizing:border-box;resize: none;">
+10&#9;23&#9;12&#9;32
+20&#9;14&#9;18&#9;43
+30&#9;64&#9;24&#9;12
+40&#9;23&#9;30&#9;47
+50&#9;57&#9;36&#9;75
+60&#9;51&#9;42&#9;40
+70&#9;44&#9;48&#9;12</textarea>
+<input checked="checked" id="xyyy" style="margin-top:10px" type="radio" name="data-type" /><label for="xyyy" style="margin-top:10px"><span class="xcolor">X1</span><span class="ycolor">Y1</span><span class="ycolor">Y2</span><span class="ycolor">Y3</span></label>
+<label for="xyxy" style="float:right;margin-top:5px"><span class="xcolor">X1</span><span class="ycolor">Y1</span><span class="xcolor">X2</span><span class="ycolor">Y2</span></label><input id="xyxy" type="radio" style="float:right;margin-top:10px" name="data-type" /><br><br>
+<span style="font-size:14px;top:-5px;position:relative">Smooth Graph (Remove Noise)</span>
+<input class="slider" type="range" id="smoother" min="0" max="100" step="1" value="0"></div>
+<div class="themebox cell">
+<div class="gselector">
+<input checked="checked" id="line-chart" type="radio" name="graph-type" />
+<label class="gselectorl line-chart" for="line-chart"></label>
+<input id="stack-chart" type="radio" name="graph-type" />
+<label class="gselectorl stack-chart" for="stack-chart"></label>
+<input id="multiscale-chart" type="radio" name="graph-type" />
+<label class="gselectorl multiscale-chart" for="multiscale-chart"></label>
+<input id="area-chart" type="radio" name="graph-type" />
+<label class="gselectorl area-chart" for="area-chart"></label>
+<input id="bar-chart" type="radio" name="graph-type" />
+<label class="gselectorl bar-chart" for="bar-chart"></label></div></div>
+<div class="themebox cell" style="margin:10px 0;display:inline-block">
+<div class="test1">
+<input checked="checked" id="default" class="test1" type="radio" name="instrument" /><label for="default">Default</label>
+<input id="uv" type="radio" name="instrument" /><label for="uv">UV-Vis</label>
+<input id="xrd" type="radio" name="instrument" /><label for="xrd">XRD</label>
+<input id="ftir" type="radio" name="instrument" /><label for="ftir">FTIR</label>
+<input id="raman" type="radio" name="instrument" /><label for="raman">Raman</label>
+<input id="pl" type="radio" name="instrument" /><label for="pl">PL</label>
+<input id="xps" type="radio" name="instrument" /><label for="xps">XPS</label>
+<input id="tga" type="radio" name="instrument" /><label for="tga">TGA</label>
+<input id="dsc" type="radio" name="instrument" /><label for="dsc">DSC</label>
+<input id="bet" type="radio" name="instrument" /><label for="bet">BET</label>
+<input id="saxs" type="radio" name="instrument" /><label for="saxs">SAXS</label>
+<input id="nmr" type="radio" name="instrument" /><label for="nmr">NMR</label></div></div>
+</div>
+
+<div style="width:60%">
+<div style="display:flex;margin-bottom:10px;justify-content:space-around">
+<div class="themebox" style="width:25%;margin-right:10px;display:flex;justify-content:space-around;flex-wrap:wrap;font-size:10px;height:fit-content">
+<div style="width:100%;height:fit-content">X Axis Tiles Count
+<input class="xscalecount slider" style="margin:7px 0" type="range" min="0" max="25" step="1" value="8"></div>
+<div style="width:49%;height:fit-content">X1 Scale
+<input class="x1scale tnum" type="number"></div>
+<div style="width:49%;height:fit-content">X2 Scale
+<input class="x2scale tnum" type="number"></div></div>
+<div class="themebox" style="width:25%;display:flex;justify-content:space-around;flex-wrap:wrap;font-size:10px;height:fit-content">
+<div style="width:100%;height:fit-content">Y Axis Tiles Count
+<input class="yscalecount slider" type="range" min="0" max="25" step="1" value="5"></div>
+<div style="width:49%;height:fit-content">Y1 Scale
+<input class="y1scale tnum" type="number"></div>
+<div style="width:49%;height:fit-content">Y2 Scale
+<input class="y2scale tnum" type="number"></div></div>
+<div class="themebox" style="width:50%;margin-left:10px;display:flex;justify-content:space-around;flex-wrap:wrap;font-size:10px">
+<div style="width:22%;height:fit-content">Axis Font Size
+<input class="fontscale tnum" type="number" value="18"></div>
+<div style="width:22%;height:fit-content">Title Font Size
+<input class="fonttitle tnum" type="number" value="20"></div>
+<div style="width:40%;height:fit-content">Line Thickness
+<input class="linewidth slider" type="range" min="0.1" max="10" step="0.1" value="2"></div>
+<div style="width:100%;height:fit-content;display:flex;justify-content:space-around;flex-wrap:wrap;margin-top:10px">
+<div style="width:40%">
+<a id='addtext' class="btn" style="padding:7px 30px;font-size:12px;cursor:context-menu">Add Text</a></div>
+<div style="width:40%">
+<a id="download-button" class="btn" style="font-size:12px;padding:8px 10px;cursor:default">Download Graph</a>
+</div></div></div>
+</div>
+<div class="themebox" style="width:100%">
+<div id="graph-div" style="position:relative"><div id="tooltip" style="position:absolute;right:0;bottom:0;font-size:12px;color:red;letter-spacing:1px;"></div></div>
+<div class="texteditor" style="position:absolute;display:none;background:#e0e0e0;padding:10px;border-radius:5px">
+<input type="number" id="updatenumber" min="1" max="200" value='20'>
+<input type="color" id="updatecolor" value='#000000'>
+<button id='remove'>Remove</button><br>
+<input type="text" id="updatetext" style="width:-webkit-fill-available"></div>	
+</div>
+</div>
+</div>
+<div style="margin:30px 10px 0 10px;display:flex;justify-content:space-around;flex-wrap:wrap;">
+<div style="width:30%">
+<span style="font-size:20px;color:#fff;font-weight:bold;margin-bottom:20px">Important Instructions</span><br>
+<span style="font-size:18px;color:#fff">➡ Copy from Excel and paste into data field<br>➡ Double click any text to edit or remove<br>➡ You can move any text</span></div>
+<div style="width:30%">
+<span style="font-size:20px;color:#fff;font-weight:bold;margin-bottom:20px">Future Update</span><br>
+<span style="font-size:18px;color:#fff">➡ Few 3D Graph Types<br>➡ Graph Smooth slider advance version<br>➡ Download Graph More Formats and Resolution Options<br>➡ Bugs fix.<br>➡ You can always request your needy feature to our team.</span></div>
+<div style="width:30%">
+<span style="font-size:20px;color:#fff;font-weight:bold;margin-bottom:20px"><a href="https://buy.stripe.com/aEU6podWH4Zogvu7su" style="color:darkred" target="_blank">Click Here Donate Us</a></span><br><span style="font-size:18px;color:#fff">➡ You can donate us to improve this product, so that our team can add all the origin featured into this graph like baseline correction, peak deconvolution etc.<br>➡ We are also planning the developement of new products like online AI based scientific image analyzer and online manuscript writter which can automatically arrange references and images in your manuscript and you will never worry about all messy things during manuscript writing.</span></div>
+</div>
+
+<script>
+const slider = d3.select('#smoother');
+const textarea = d3.select('#tabsheet');
+let originalContent = textarea.node().value;
+textarea.on('input', function () {
+originalContent = textarea.node().value;});
+textarea.on('paste', function () {
+setTimeout(() => {
+originalContent = textarea.node().value;}, 0);});
+slider.on('input', function () {
+const value = parseInt(slider.node().value, 10);
+if (value === 0) {
+textarea.node().value = originalContent;} 
+else { const lines = originalContent.split('\n');
+const newContent = lines.filter((_, i) => i % (value + 1) === 0);
+textarea.node().value = newContent.join('\n');} draw();});
+
+const coreWidth = 800, coreHeight = 500, margin = { top: 20, right: 50, bottom: 70, left: 100 }, width = coreWidth - margin.left - margin.right, height = coreHeight - margin.top - margin.bottom;
+const svg = d3.select("#graph-div").append("svg").attr("class", "graph").attr("viewBox", `-${margin.left} -${margin.top} ${coreWidth} ${coreHeight}`).attr("style","background:white");
+const colorsArray = ["#000000", "#0000FF", "#FF0000", "#008000", "#800080", "#FFA500", "#8B0000", "#ADD8E6"];
+
+function draw() {
+d3.select("#tabsheet").on("input", draw); 
+document.querySelectorAll('input[name="graph-type"], input[name="data-type"]').forEach(radio => radio.addEventListener("click", draw));
+svg.selectAll("*").remove();
+const data = document.getElementById("tabsheet").value.split(/\n/).map(line => line.split(/\t|,/).filter(item => item !== "")).filter(li => li.length > 0);
+const dataset = d3.transpose(data), xyyycolumnX = dataset.slice(0, 1), xyyycolumnY = dataset.slice(1), xyxycolumnX = dataset.filter((_, i) => i % 2 === 0), xyxycolumnY = dataset.filter((_, i) => i % 2 === 1);
+const chartType = document.querySelector('input[name="graph-type"]:checked').id;
+const dataType = document.querySelector('input[name="data-type"]:checked').id;
+const chartFunctions = {
+"xyyy-line-chart": [draw_lineXYYY, getMin(xyyycolumnX), getMax(xyyycolumnX), getMin(xyyycolumnY), getMax(xyyycolumnY)], "xyxy-line-chart": [draw_lineXYXY, getMin(xyxycolumnX), getMax(xyxycolumnX), getMin(xyxycolumnY), getMax(xyxycolumnY)],
+"xyyy-stack-chart": [draw_stackXYYY, getMin(xyyycolumnX), getMax(xyyycolumnX), getMin(xyyycolumnY), getMax(xyyycolumnY)], "xyxy-stack-chart": [draw_stackXYXY, getMin(xyxycolumnX), getMax(xyxycolumnX), getMin(xyxycolumnY), getMax(xyxycolumnY)],
+"xyyy-multiscale-chart": [draw_multiscaleXYYY, getMin(xyyycolumnX), getMax(xyyycolumnX), getMin(xyyycolumnY), getMax(xyyycolumnY)], "xyxy-multiscale-chart": [draw_multiscaleXYXY, getMin(xyxycolumnX), getMax(xyxycolumnX), getMin(xyxycolumnY), getMax(xyxycolumnY)],
+"xyyy-area-chart": [draw_areaXYYY, getMin(xyyycolumnX), getMax(xyyycolumnX), getMin(xyyycolumnY), getMax(xyyycolumnY)], "xyxy-area-chart": [draw_areaXYXY, getMin(xyxycolumnX), getMax(xyxycolumnX), getMin(xyxycolumnY), getMax(xyxycolumnY)],
+"xyyy-bar-chart": [draw_barXYYY, getMin(xyyycolumnX), getMax(xyyycolumnX), getMin(xyyycolumnY), getMax(xyyycolumnY)], "xyxy-bar-chart": [draw_barXYYY, getMin(xyyycolumnX), getMax(xyyycolumnX), getMin(xyyycolumnY), getMax(xyyycolumnY)]};
+const key = `${dataType}-${chartType}`;
+if (chartFunctions.hasOwnProperty(key)) {
+d3.select('#default').property('checked', true);
+const [chartFn, x1, x2, y1, y2, sx, sy, fs, ft] = chartFunctions[key], mrgx = (x2 - x1) * 0.05, mrgy = (y2 - y1) * 0.05;
+d3.select(".x1scale").property('value', x1 - mrgx);
+d3.select(".x2scale").property('value', x2 + mrgx);
+d3.select(".y1scale").property('value', y1 - mrgy);
+d3.select(".y2scale").property('value', y2 + mrgy);
+function handleInputChange(x1, x2) {
+svg.selectAll("*").remove();
+const y1 = d3.select(".y1scale").property('value'), y2 = d3.select(".y2scale").property('value'), sx = d3.select(".xscalecount").property('value'), sy = d3.select(".yscalecount").property('value'), lw = d3.select(".linewidth").property('value'), fs = d3.select(".fontscale").property('value'), ft = d3.select(".fonttitle").property('value');
+chartFn(dataset, x1, x2, y1, y2, sx, sy, lw, fs, ft)}
+d3.selectAll(".x1scale,.x2scale,.y1scale,.y2scale,.xscalecount,.yscalecount,.linewidth,.fontscale,.fonttitle,#default,#uv,#xrd,#raman,#pl,#xps,#tga,#dsc,#bet,#saxs").on('keyup input', function() {
+const x1 = d3.select(".x1scale").property('value'), x2 = d3.select(".x2scale").property('value');
+handleInputChange(x1, x2)});
+d3.selectAll("#ftir,#nmr").on('click', function() {
+const x1 = d3.select(".x2scale").property('value'), x2 = d3.select(".x1scale").property('value');
+d3.select(".x2scale").property('value',x2); d3.select(".x1scale").property('value',x1)
+handleInputChange(x1, x2);})
+chartFn(dataset, x1 - mrgx, x2 + mrgx, y1 - mrgy, y2 + mrgy, 8, 5, 2, 18, 20);}}
+	
+function getMin(data) { const flatData = data.flat().map(d => +d); return d3.min(flatData);}
+function getMax(data) { const flatData = data.flat().map(d => +d); return d3.max(flatData);}
+	
+function dragStart(event, d) {
+d3.select(this).attr("data-drag-offset-x", event.x - parseFloat(d3.select(this).attr("transform").split(",")[0].split("(")[1]));
+d3.select(this).attr("data-drag-offset-y", event.y - parseFloat(d3.select(this).attr("transform").split(",")[1]));}
+function dragging(event, d) {
+const offsetX = parseFloat(d3.select(this).attr("data-drag-offset-x"));
+const offsetY = parseFloat(d3.select(this).attr("data-drag-offset-y"));
+d3.select(this).attr("transform", "translate(" + (event.x - offsetX) + "," + (event.y - offsetY) + ")");
+d3.select(".texteditor").style("display", "none");}
+function dragEnd(event, d) {
+d3.select(this).style("stroke", "");}
+drag = d3.drag().on("start", dragStart).on("drag", dragging).on("end", dragEnd);
+
+d3.select("#addtext").on ("click", function() {
+d3.select(".texteditor").style("display", "none");
+d3.selectAll('.textelement').classed('activetext', false);
+d3.select(".graph").append("g").attr("transform", "translate(-80,0)").call(drag).append("text").classed("textelement",true).text("Double Click Me To Edit").attr("x", width/2).attr("y",height/2).attr("fill","#000000").attr("font-family", "Calibri, sans-serif")})
+
+d3.selectAll('.graph').on('dblclick', function(event) {
+  if (event.target.classList.contains('textelement')) {
+    d3.selectAll('.textelement').classed('activetext', false);
+    var target = d3.select(event.target);
+    target.classed('activetext', true);
+d3.select("#updatetext").property('value', target.text());
+d3.select('#updatecolor').property('value', target.attr('fill'));
+d3.select('#updatenumber').property('value', target.attr('font-size'));
+if (d3.select("#updatetext").property('value') === "Double Click Me To Edit") {
+d3.select("#updatetext").property('value', '');
+d3.select("#updatetext").attr("placeholder", "Write Your Text Here...");
+d3.select("#updatetext").node().focus();
+d3.select("#updatetext").node().select();}
+d3.select(".texteditor").style('display', 'block').style('top', (event.clientY + window.scrollY - 85) + 'px').style('left', (event.clientX - 90) + 'px')}})
+	
+$(".graph").on('dblclick', '.xaxis', function() {
+d3.select(".xaxiseditor").style('display', 'block').style('top', (event.clientY + window.scrollY - 85) + 'px').style('left', (event.clientX - 90) + 'px')})
+	
+$(".graph").on('dblclick', '.yaxis', function() {
+d3.select(".yaxiseditor").style('display', 'block').style('top', (event.clientY + window.scrollY - 25) + 'px').style('left', (event.clientX + 30) + 'px')})
+
+d3.select(".graph").on("click", function() {
+d3.selectAll(".textelement").classed("activetext", false);
+d3.selectAll(".texteditor, .xaxiseditor, .yaxiseditor").style("display", "none");
+d3.select("#updatetext").property("value", "");
+d3.select("#updatecolor").property("value", "#000000");
+d3.select("#updatenumber").property("value", "16");});
+
+d3.select("#updatetext").on('keyup', function() {
+d3.select(".activetext").text(d3.select(this).property('value'))});
+d3.select("#updatecolor").on('input', function() {
+d3.select('.activetext').attr('fill', d3.select(this).property('value'))});
+d3.select("#updatenumber").on('input', function() {
+d3.select('.activetext').attr('font-size', d3.select(this).property('value') + "px")});
+d3.select("#remove").on('click', function() {
+d3.select('.activetext').remove();
+d3.select(".texteditor").style("display", "none")});
+
+d3.selectAll("#default,#uv,#xrd,#ftir,#raman,#pl,#xps,#tga,#dsc,#bet,#saxs,#nmr").on('click', function() { xytitles(20);});
+function xytitles(ft) {
+svg.selectAll(".xttl,.yttl").remove();
+let xTitle, yTitle;if(d3.select("#default").property("checked")){xTitle="X Axis";yTitle="Y Axis"}
+else if(d3.select("#uv").property("checked")){xTitle="Wavelength (nm)";yTitle="Absorbance (a.u.)"}
+else if(d3.select("#xrd").property("checked")){xTitle="2-Theta (degree)";yTitle="Intensity (a.u.)"}
+else if(d3.select("#ftir").property("checked")){xTitle="Wavenumber (cm-1)";yTitle="Transmittance (%)"}
+else if(d3.select("#raman").property("checked")){xTitle="Raman Shift (cm-1)";yTitle="Intensity (a.u.)"}
+else if(d3.select("#pl").property("checked")){xTitle="Wavelength (nm)";yTitle="Intensity (a.u.)"}
+else if(d3.select("#xps").property("checked")){xTitle="Binding Energy (eV)";yTitle="Intensity (cps)"}
+else if(d3.select("#tga").property("checked")){xTitle="Temperature (°C)";yTitle="Weight (%)"}
+else if(d3.select("#dsc").property("checked")){xTitle="Temperature (°C)";yTitle="Heat Flow (endo/exo)"}
+else if(d3.select("#bet").property("checked")){xTitle="Relative Pressure (p/p°)";yTitle="Absorbed Quantity (cm3/g)"}
+else if(d3.select("#saxs").property("checked")){xTitle="q (Å-1)";yTitle="Intensity (a.u.)"}
+else if(d3.select("#nmr").property("checked")){xTitle="δ (ppm)";yTitle="Intensity (a.u.)"};
+svg.append("g").attr("transform", "translate(0,0)").call(drag).append("text").attr("class","textelement xttl").text(xTitle).attr("x", coreWidth/2-margin.left).attr("y",coreHeight-margin.bottom/2).attr("font-size",ft).attr("text-anchor", "middle").attr("font-family", "Calibri, sans-serif"); 
+svg.append("g").attr("transform", "translate(0,0)").call(drag).append("text").attr("class","textelement yttl").text(yTitle).attr("x", -(height/2+margin.top)).attr("y",-(margin.left/2)).attr("transform", "rotate(-90)").attr("font-size",ft).attr("text-anchor", "middle").attr("font-family", "Calibri, sans-serif");}
+
+function toprightscale(x, y, lw) {
+svg.append("g").attr("stroke-width",lw).call(d3.axisBottom(x).ticks(0));
+svg.append("g").attr("stroke-width",lw).attr("transform", `translate(${width},0)`).call(d3.axisLeft(y).ticks(0));}
+	
+function bottomscale(x, lw, sx, fs) {
+svg.append("g").attr("class","xaxis").attr("stroke-width",lw).attr("transform", `translate(0,${height})`).call(d3.axisBottom(x).ticks(sx)).attr("font-size",fs);}
+	
+function leftscale(y, lw, sy, fs) {
+svg.append("g").attr("class","yaxis").attr("stroke-width",lw).call(d3.axisLeft(y).ticks(sy)).attr("font-size",fs);}
+	
+function xyyysamplename(dataset, lw){
+for (let i = 0; i < dataset.length-1; i++) {
+const group = svg.append("g").attr("transform", `translate(0,${margin.top})`).call(drag);
+group.append("rect").attr("x", width-145).attr("y", margin.top+(i*22)-16).attr("width", 120).attr("height", 22).attr("fill", "white").attr("opacity","0.8");
+group.append("text").classed("textelement", true).attr("x",width-100).attr("y",margin.top+(i*22)).attr("fill", colorsArray[i]).text("Sample " + (i+1)).attr("font-size",17).attr("font-family", "Calibri, sans-serif");
+group.append("line").attr("stroke-width",lw).attr("x1", width - 135).attr("y1",margin.top+(i*22)-5).attr("x2",width-110).attr("y2",margin.top+(i*22)-5).attr("stroke", colorsArray[i]);}}
+	
+function xyyysamplenamebox(dataset, lw){
+for (let i = 0; i < dataset.length-1; i++) {
+const group = svg.append("g").attr("transform", `translate(0,${margin.top})`).call(drag);
+group.append("rect").attr("x", width-145).attr("y", margin.top+(i*22)-16).attr("width", 120).attr("height", 22).attr("fill", "white").attr("opacity","0.8");
+group.append("text").classed("textelement", true).attr("x",width-100).attr("y",margin.top+(i*22)).attr("fill", colorsArray[i]).text("Sample " + (i+1)).attr("font-size",17).attr("font-family", "Calibri, sans-serif");
+group.append("rect").attr("x", width-135).attr("y", margin.top+(i*22)-11).attr("width", 25).attr("height", 10).attr("fill", colorsArray[i]).attr("opacity","0.6");}}
+
+function xyxysamplename(dataset, lw){
+for (let i = 0; i < dataset.length/2; i++) {
+const group = svg.append("g").attr("transform", `translate(0,${margin.top})`).call(drag);
+group.append("rect").attr("x", width-145).attr("y", margin.top+(i*22)-16).attr("width", 120).attr("height", 22).attr("fill", "white").attr("opacity","0.8");
+group.append("text").classed("textelement", true).attr("x",width-100).attr("y",margin.top+(i*22)).attr("fill", colorsArray[i]).text("Sample " + (i+1)).attr("font-size",17).attr("font-family", "Calibri, sans-serif");
+group.append("line").attr("stroke-width",lw).attr("x1", width - 135).attr("y1",margin.top+(i*22)-5).attr("x2",width-110).attr("y2",margin.top+(i*22)-5).attr("stroke", colorsArray[i]);}}
+	
+function xyxysamplenamebox(dataset, lw){
+for (let i = 0; i < dataset.length/2; i++) {
+const group = svg.append("g").attr("transform", `translate(0,${margin.top})`).call(drag);
+group.append("rect").attr("x", width-145).attr("y", margin.top+(i*22)-16).attr("width", 120).attr("height", 22).attr("fill", "white").attr("opacity","0.8");
+group.append("text").classed("textelement", true).attr("x",width-100).attr("y",margin.top+(i*22)).attr("fill", colorsArray[i]).text("Sample " + (i+1)).attr("font-size",17).attr("font-family", "Calibri, sans-serif");
+group.append("rect").attr("x", width-135).attr("y", margin.top+(i*22)-11).attr("width", 25).attr("height", 10).attr("fill", colorsArray[i]).attr("opacity","0.6");}}
+	
+function tooltip(x, y) {
+svg.on("mousemove", function (event) {d3.select("#tooltip").html( "X-Scale: " + x.invert(d3.pointer(event)[0]).toFixed(3) + "<br>Y-Scale: " + y.invert(d3.pointer(event)[1]).toFixed(3));});}
+	
+function draw_lineXYYY(dataset, x1, x2, y1, y2, sx, sy, lw, fs, ft) {
+const x = d3.scaleLinear().domain([x1,x2]).range([0, width]).clamp(true);
+const y = d3.scaleLinear().domain([y1,y2]).range([height, 0]).clamp(true);
+bottomscale(x, lw, sx, fs); leftscale(y, lw, sy, fs); toprightscale(x, y, lw);
+xytitles(ft); tooltip(x, y); xyyysamplename(dataset, lw);
+for (let i = 0; i < dataset.length; i++) {
+const line_XY1 = d3.line().curve(d3.curveLinear).x((_, index) => x(+dataset[0][index])).y((_, index) => y(+dataset[i + 1][index]));
+svg.append("path").attr("d", line_XY1(dataset[i])).attr("fill", "none").attr("stroke", colorsArray[i]).attr("stroke-width",lw).lower();}}
+	
+function draw_lineXYXY(dataset, x1, x2, y1, y2, sx, sy, lw, fs, ft) {
+const x = d3.scaleLinear().domain([x1,x2]).range([0, width]).clamp(true);
+const y = d3.scaleLinear().domain([y1,y2]).range([height, 0]).clamp(true);
+bottomscale(x, lw, sx, fs); leftscale(y, lw, sy, fs); toprightscale(x, y, lw);
+xytitles(ft); tooltip(x, y); xyxysamplename(dataset, lw);
+for (let i=0,j=0; i<dataset.length-1;i+=2) {
+const line_XY1 = d3.line().curve(d3.curveLinear).x((_, index) => x(+dataset[i][index])).y((_, index) => y(+dataset[i + 1][index]));
+svg.append("path").attr("d", line_XY1(dataset[i])).attr("fill", "none").attr("stroke", colorsArray[j]).attr("stroke-width",lw).lower(); j+=1;}}
+
+function draw_stackXYYY(dataset, x1, x2, y1, y2, sx, sy, lw, fs, ft) {
+let xyyycolumnY = dataset.slice(1);
+const x = d3.scaleLinear().domain([x1,x2]).range([0, width]);
+const y = d3.scaleLinear().domain([y1,y2]).range([height, 0]);
+bottomscale(x, lw, sx, fs); leftscale(y, lw, sy, fs); toprightscale(x, y, lw);
+xytitles(ft); tooltip(x, y); xyyysamplename(dataset, lw);		
+for (let i = 0; i < dataset.length; i++) {
+const y = d3.scaleLinear().domain([getMin(xyyycolumnY[i])-(getMax(xyyycolumnY[i])-getMin(xyyycolumnY[i]))*0.05, getMax(xyyycolumnY[i])+(getMax(xyyycolumnY[i])-getMin(xyyycolumnY[i]))*0.05]).range([height - i * (height / (dataset.length-1)), height - (i + 1) * (height / (dataset.length-1))]);
+const line_XY1 = d3.line().curve(d3.curveLinear).x((_, index) => x(+dataset[0][index])).y((_, index) => y(+dataset[i + 1][index]));
+svg.append("path").attr("d", line_XY1(dataset[i])).attr("fill", "none").attr("stroke", colorsArray[i]).attr("stroke-width",lw).lower();}}
+
+function draw_stackXYXY(dataset, x1, x2, y1, y2, sx, sy, lw, fs, ft) {
+let xyxycolumnY = dataset.slice(1);
+const x = d3.scaleLinear().domain([x1,x2]).range([0, width]);
+const y = d3.scaleLinear().domain([y1,y2]).range([height, 0]);
+bottomscale(x, lw, sx, fs); leftscale(y, lw, sy, fs); toprightscale(x, y, lw);
+xytitles(ft); tooltip(x, y); xyxysamplename(dataset, lw);
+for (let i=0,j=0; i<dataset.length-1;i+=2) {
+const y = d3.scaleLinear().domain([getMin(xyxycolumnY[i])-(getMax(xyxycolumnY[i])-getMin(xyxycolumnY[i]))*0.05, getMax(xyxycolumnY[i])+(getMax(xyxycolumnY[i])-getMin(xyxycolumnY[i]))*0.05]).range([height - j * (height / (dataset.length/2)), height - (j + 1) * (height / (dataset.length/2))]);
+const line_XY1 = d3.line().curve(d3.curveLinear).x((_, index) => x(+dataset[i][index])).y((_, index) => y(+dataset[i + 1][index]));
+svg.append("path").attr("d", line_XY1(dataset[i])).attr("fill", "none").attr("stroke", colorsArray[j]).attr("stroke-width",lw).lower();j++;}}
+
+function draw_multiscaleXYYY(dataset, x1, x2, y1, y2, sx, sy, lw, fs, ft) {
+let xyyycolumnY = dataset.slice(1);
+const x = d3.scaleLinear().domain([x1,x2]).range([0, width-((xyyycolumnY.length-2)*40)]);
+const y0 = d3.scaleLinear().domain([getMin(xyyycolumnY[0]), getMax(xyyycolumnY[0])]).range([height, 0]);
+svg.append("g").attr("transform", `translate(0, 0)`).attr("stroke-width",lw).attr("color",colorsArray[0]).call(d3.axisLeft(y0).ticks(sy)).attr("font-size",fs);
+svg.append("g").attr("stroke-width",lw).call(d3.axisBottom(x).ticks(0));
+bottomscale(x, lw, sx, fs); xytitles(ft);
+for (let i = 0; i < dataset.length-1; i++) {
+const group = svg.append("g").attr("transform", `translate(0,${margin.top})`).call(drag);
+group.append("rect").attr("x", width-180).attr("y", margin.top+(i*22)-16).attr("width", 120).attr("height", 22).attr("fill", "white").attr("opacity","0.8");
+group.append("text").classed("textelement", true).attr("x",width-100-((xyyycolumnY.length-2)*40)).attr("y",margin.top+(i*22)).attr("fill", colorsArray[i]).text("Sample " + (i+1)).attr("font-size",17);
+group.append("line").attr("stroke-width",lw).attr("x1", width - 135-((xyyycolumnY.length-2)*40)).attr("y1",margin.top+(i*22)-5).attr("x2",width-110-((xyyycolumnY.length-2)*40)).attr("y2",margin.top+(i*22)-5).attr("stroke", colorsArray[i]);}
+for (let i=0;i<dataset.length;i++) {
+const y = d3.scaleLinear().domain([getMin(xyyycolumnY[i])-(getMax(xyyycolumnY[i])-getMin(xyyycolumnY[i]))*0.05, getMax(xyyycolumnY[i])+(getMax(xyyycolumnY[i])-getMin(xyyycolumnY[i]))*0.05]).range([height, 0]);
+svg.append("g").attr("transform", `translate(${width-((xyyycolumnY.length-2)*40)+(i-1)*40},0)`).attr("class", "yaxis"+i).attr("stroke-width",lw).attr("color",colorsArray[i]).call(d3.axisRight(y).ticks(sy)).attr("font-size",fs); 
+const line_XY1 = d3.line().curve(d3.curveLinear).x((_, index) => x(+dataset[0][index])).y((_, index) => y(+dataset[i + 1][index]));
+svg.append("path").attr("d", line_XY1(dataset[i])).attr("fill", "none").attr("stroke", colorsArray[i]).attr("stroke-width",lw).lower();}}
+
+function draw_multiscaleXYXY(dataset, x1, x2, y1, y2, sx, sy, lw, fs, ft) {
+xyxycolumnY = dataset.slice(1);
+const x = d3.scaleLinear().domain([x1,x2]).range([0, width-(((xyxycolumnY.length/2)-1)*40)]);
+const y0 = d3.scaleLinear().domain([getMin(xyxycolumnY[0]), getMax(xyxycolumnY[0])]).range([height, 0]);
+svg.append("g").attr("transform", `translate(0, 0)`).attr("stroke-width",lw).attr("color",colorsArray[0]).call(d3.axisLeft(y0).ticks(sy)).attr("font-size",fs);
+svg.append("g").attr("stroke-width",lw).call(d3.axisBottom(x).ticks(0));
+bottomscale(x, lw, sx, fs); xytitles(ft);
+for (let i = 0; i < dataset.length/2; i++) {
+const group = svg.append("g").attr("transform", `translate(0,${margin.top})`).call(drag);
+group.append("rect").attr("x", width-160).attr("y", margin.top+(i*22)-16).attr("width", 120).attr("height", 22).attr("fill", "white").attr("opacity","0.8");
+group.append("text").classed("textelement", true).attr("x",width-100-(((xyxycolumnY.length/2)-1)*40)).attr("y",margin.top+(i*22)).attr("fill", colorsArray[i]).text("Sample " + (i+1)).attr("font-size",17);
+group.append("line").attr("stroke-width",lw).attr("x1", width - 135-(((xyxycolumnY.length/2)-1)*40)).attr("y1",margin.top+(i*22)-5).attr("x2",width-110-(((xyxycolumnY.length/2)-1)*40)).attr("y2",margin.top+(i*22)-5).attr("stroke", colorsArray[i]);}
+for (let i=0,j=0; i<dataset.length-1;i+=2) {      
+const y = d3.scaleLinear().domain([getMin(xyxycolumnY[i])-(getMax(xyxycolumnY[i])-getMin(xyxycolumnY[i]))*0.05, getMax(xyxycolumnY[i])+(getMax(xyxycolumnY[i])-getMin(xyxycolumnY[i]))*0.05]).range([height, 0]);
+svg.append("g").attr("transform", `translate(${width-(((xyxycolumnY.length/2)-1)*40)+(j-1)*40},0)`).attr("color",colorsArray[j]).attr("stroke-width",lw).attr("class", "yaxis"+i).call(d3.axisRight(y).ticks(sy)).attr("font-size",fs);
+const line_XY1 = d3.line().curve(d3.curveLinear).x((_, index) => x(+dataset[i][index])).y((_, index) => y(+dataset[i + 1][index]));
+svg.append("path").attr("d", line_XY1(dataset[i])).attr("fill", "none").attr("stroke", colorsArray[j]).attr("stroke-width",lw).lower();j++}}
+
+function draw_areaXYYY(dataset, x1, x2, y1, y2, sx, sy, lw, fs, ft) {
+const x = d3.scaleLinear().domain([x1,x2]).range([0, width]).clamp(true);
+const y = d3.scaleLinear().domain([y1,y2]).range([height, 0]).clamp(true);
+bottomscale(x, lw, sx, fs); leftscale(y, lw, sy, fs); toprightscale(x, y, lw); xytitles(ft); tooltip(x, y); xyyysamplenamebox(dataset, lw)	
+for (let i = 0; i < dataset.length; i++) {
+const area = d3.area().curve(d3.curveLinear).x((_, index) => x(+dataset[0][index])).y0(y(y.ticks()[0])).y1((_, index) => y(+dataset[i + 1][index]));
+svg.append("path").datum(dataset[i]).attr("class", "area").attr("d", area).attr("fill", colorsArray[i]).attr("opacity", "0.6").lower();}}
+
+function draw_areaXYXY(dataset, x1, x2, y1, y2, sx, sy, lw, fs, ft) {
+const x = d3.scaleLinear().domain([x1,x2]).range([0, width]).clamp(true);
+const y = d3.scaleLinear().domain([y1,y2]).range([height, 0]).clamp(true);
+bottomscale(x, lw, sx, fs); leftscale(y, lw, sy, fs); toprightscale(x, y, lw); xytitles(ft); tooltip(x, y); xyxysamplenamebox(dataset, lw);
+for (let i=0,j=0; i<dataset.length-1;i+=2) {
+const area = d3.area().curve(d3.curveLinear).x((_, index) => x(+dataset[i][index])).y0(y(y.ticks()[0])).y1((_, index) => y(+dataset[i + 1][index]));
+svg.append("path").datum(dataset[i]).attr("class", "area").attr("d", area).attr("fill", colorsArray[j]).attr("opacity", "0.6").lower();j++}}
+
+function draw_barXYYY(dataset, x1, x2, y1, y2, sx, sy, lw, fs, ft) {
+const barWidthFraction = 1 / (dataset.length - 1);
+const xLabels = dataset[0].map((_, index) => dataset[0][index]);
+const x = d3.scaleBand().domain(xLabels).range([0, width]).padding(0.1);
+const y = d3.scaleLinear().domain([y1,y2]).range([height, 0]).nice();
+svg.append("g").attr("stroke-width",lw).call(d3.axisBottom(x).ticks(0).tickSize(0).tickFormat(''));
+svg.append("g").attr("stroke-width",lw).attr("transform", `translate(${width},0)`).call(d3.axisLeft(y).ticks(0));
+bottomscale(x, lw, sx, fs); leftscale(y, lw, sy, fs); xytitles(ft); tooltip(x, y); xyyysamplenamebox(dataset, lw)
+for (let i = 0; i < dataset.length - 1; i++) {
+const barGroup = svg.append("g").attr("fill", colorsArray[i]).lower();
+barGroup.selectAll("rect").data(dataset[i + 1]).enter().append("rect").attr("x", (_, index) => x(xLabels[index]) + (x.bandwidth() * i * barWidthFraction)).attr("y", d => y(+d)).attr("width", x.bandwidth() * barWidthFraction).attr("height", d => height - y(+d)).attr("opacity", "0.7");}}
+	
+draw();
+</script>
+<script>
+document.getElementById("download-button").addEventListener("click", function() {
+const svgElement = document.querySelector("svg.graph");
+const svgData = new XMLSerializer().serializeToString(svgElement);
+const img = new Image();
+img.onload = function() {
+const canvas = document.createElement("canvas");
+const ctx = canvas.getContext("2d");
+canvas.width = img.width * 2;
+canvas.height = img.height * 2;
+ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+canvas.toBlob(function(blob) {
+const downloadLink = document.createElement("a");
+downloadLink.href = URL.createObjectURL(blob);
+downloadLink.download = "graph.png";
+downloadLink.click();}, "image/png", 1);};
+img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svgData);});
+</script>
